@@ -4,6 +4,37 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 
 
+class TrackingBarcode{
+  String?noref;
+  String?lokasi;
+  String?typetran;
+  String?jum;
+  String?jumlog;
+  String?no_skau;
+  String?tgl_doc;
+  String?tgl_rec;
+
+  TrackingBarcode({this.noref,this.lokasi,this.typetran,this.jum,this.jumlog,this.no_skau,this.tgl_doc,this.tgl_rec});
+   
+  factory TrackingBarcode.fromJson(Map<String,dynamic>json)
+  {
+    return TrackingBarcode(
+      noref: json['noref'],
+      lokasi: json['lokasi'],
+      typetran: json['typetran'],
+      jum: json['jum'],
+      jumlog: json['jumlog'],
+      no_skau: json['no_skau'],
+      tgl_doc: json['tgl_doc'],
+      tgl_rec: json['tgl_rec'],
+
+      
+      );
+  }
+
+}
+
+
 class Log_Detail {
   String? LOG;
   String? HASILPOTONG;

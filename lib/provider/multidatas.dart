@@ -15,6 +15,43 @@ class Multidatas with ChangeNotifier {
 
   final box=GetStorage();
 
+  List<TrackingBarcode> getTrackingBarcode=[];
+  List<TrackingBarcode> get getGlobalTrackingBarcode=>getTrackingBarcode;
+
+  Future <void> getDataTrackingBarcode(BuildContext context,String section) async{
+    getTrackingBarcode.clear();
+
+    var url=Uri.parse(NamaServer.server+'trackingbarcode_section.php');
+     final response= await http.post(url,
+     body: {
+      'section':section
+     }
+     
+     ).timeout(Duration(seconds: 10)).catchError((error) {
+    
+  setMessage2("Server sedang sibuk/Koneksi internet terganggu,Mohon diclick process kembali",context);
+  EasyLoading.dismiss();
+});
+
+final jsonwarn=jsonDecode(response.body);
+if (jsonwarn['errormsg']=='Tidak ada data')
+{
+    setMessage2("Tidak ada data", context);
+      EasyLoading.dismiss();
+       notifyListeners();
+}
+
+
+  final json=jsonDecode(response.body)['data'] as List;
+  final newdata=json.map((a)=>TrackingBarcode.fromJson(a)).toList();
+  getTrackingBarcode=newdata;
+  notifyListeners();
+  EasyLoading.dismiss();
+
+
+  }
+
+
   List<Log_Detail> getLOgDetail= [];
   List<Log_Detail> get getgloballogdetail =>getLOgDetail;
 

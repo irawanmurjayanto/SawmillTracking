@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:sawmill_tracking/form/barcodehilang.dart';
+import 'package:sawmill_tracking/form/jumlahbarcode.dart';
 import 'package:sawmill_tracking/form/listbarcputri.dart';
 import 'package:sawmill_tracking/form/reviewpapan.dart';
 import 'package:sawmill_tracking/form/scanbarcode.dart';
@@ -150,7 +151,7 @@ getSession() async{
   Widget build(BuildContext context) {
     return Scaffold(
     
-      appBar: AppBar(title: Text("Tracking Sawmill Versi 2.3"),),
+      appBar: AppBar(title: Text("Tracking Barcode Versi 3.0"),),
       body:
       Padding(padding: EdgeInsets.all(5),
       child: 
@@ -216,6 +217,24 @@ MouseRegion(
 
           child: 
          buttonText('Scan Barcode by ukuran','m4.png')
+         )),
+
+          SizedBox(height: 5,),   
+         
+          MouseRegion( 
+          cursor: SystemMouseCursors.click,
+          
+         child:
+         GestureDetector(
+          onTap: () async {
+        
+               Navigator.push(context, MaterialPageRoute(builder: (context) => JumlahBarcodeSection()),);
+          },
+
+
+
+          child: 
+         buttonText('Jumlah Barcode By Section','m4.png')
          )),
         ],
       ),
