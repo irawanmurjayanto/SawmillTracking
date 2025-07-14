@@ -151,7 +151,7 @@ getSession() async{
   Widget build(BuildContext context) {
     return Scaffold(
     
-      appBar: AppBar(title: Text("Tracking Barcode Versi 3.0"),),
+      appBar: AppBar(title: Text("Tracking Barcode Versi 3.5"),),
       body:
       Padding(padding: EdgeInsets.all(5),
       child: 

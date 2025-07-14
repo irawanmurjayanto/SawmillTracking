@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
+import 'package:sawmill_tracking/form/jumlahbarcode_oth.dart';
 import 'package:sawmill_tracking/form/jumlahbarcode_sw.dart';
 
 class JumlahBarcodeSection extends StatefulWidget {
@@ -29,7 +32,7 @@ class _JumlahBarcodeSectionState extends State<JumlahBarcodeSection> {
             child: Row(
               children: [
                 Expanded(child: 
-                  Text("Sawmill ",style: TextStyle(color: Colors.white,fontSize: 20),)
+                  Text("Sawmill/papan ",style: TextStyle(color: Colors.white,fontSize: 20),)
                 ),
                 SizedBox(
                   width: 50,
@@ -40,6 +43,7 @@ class _JumlahBarcodeSectionState extends State<JumlahBarcodeSection> {
             
           ),
           onTap: () {
+                EasyLoading.show(status: "Processing..");
             Navigator.push(context, MaterialPageRoute(builder: (context) => JumlahBarcode_SW(judul: "Sawmill"),));
           },
           ),
@@ -69,8 +73,9 @@ class _JumlahBarcodeSectionState extends State<JumlahBarcodeSection> {
             ),
             
           ),
-          onTap: () {
-            
+            onTap: () {
+                 EasyLoading.show(status: "Processing..");
+             Navigator.push(context, MaterialPageRoute(builder: (context) => JumlahBarcode_OTH(judul: "Warehouse", section: 'wrh'),));
           },
           ),
 
@@ -101,7 +106,8 @@ class _JumlahBarcodeSectionState extends State<JumlahBarcodeSection> {
             
           ),
           onTap: () {
-            
+                EasyLoading.show(status: "Processing..");
+               Navigator.push(context, MaterialPageRoute(builder: (context) => JumlahBarcode_OTH(judul: "Oven", section: 'oven'),));
           },
           ) ,
 
@@ -133,9 +139,41 @@ class _JumlahBarcodeSectionState extends State<JumlahBarcodeSection> {
             
           ),
           onTap: () {
-            
+              EasyLoading.show(status: "Processing..");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => JumlahBarcode_OTH(judul: "Factory", section: 'fact'),));
           },
-          )            
+          ) ,
+
+           //Factory
+           
+          GestureDetector(
+            child: 
+          Container(
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              border: Border.all(style: BorderStyle.solid),
+              borderRadius: BorderRadius.circular(5)
+            ),
+            padding: EdgeInsets.all(5),
+            child: Row(
+              children: [
+                Expanded(child: 
+                  Text("Sawmill Out ",style: TextStyle(color: Colors.white,fontSize: 20),)
+                ),
+                SizedBox(
+                  width: 50,
+                  child:   Icon(Icons.arrow_right,color: Colors.white,size: 35,)),
+                
+              ],
+            ),
+            
+          ),
+          onTap: () {
+              EasyLoading.show(status: "Processing..");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => JumlahBarcode_OTH(judul: "Sawmill Out", section: 'swout'),));
+          },
+          )              
         ],
       ),
     );

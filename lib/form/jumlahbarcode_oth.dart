@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sawmill_tracking/provider/multidatas.dart';
 
-class JumlahBarcode_SW extends StatefulWidget {
+class JumlahBarcode_OTH extends StatefulWidget {
   final String judul;
-  const JumlahBarcode_SW({Key?key,required this.judul}):super(key: key);
+  final String section;
+  const JumlahBarcode_OTH({Key?key,required this.judul,required this.section}):super(key: key);
 
 
 
   @override
-  State<JumlahBarcode_SW> createState() => _JumlahBarcode_SWState(judul:judul);
+  State<JumlahBarcode_OTH> createState() => _JumlahBarcode_SWState(judul:judul,section:section);
 }
 
-class _JumlahBarcode_SWState extends State<JumlahBarcode_SW> {
+class _JumlahBarcode_SWState extends State<JumlahBarcode_OTH> {
 
    final String judul;
-   _JumlahBarcode_SWState({required this.judul});
+    final String section;
+   _JumlahBarcode_SWState({required this.judul,required this.section});
    
     Future getDatabarcode() async{
-        Provider.of<Multidatas>(context,listen: false).getDataTrackingBarcode(context, "papan");
+        Provider.of<Multidatas>(context,listen: false).getDataTrackingBarcode(context, section);
     }
 
     Future onRefresh() async {
@@ -36,11 +38,13 @@ class _JumlahBarcode_SWState extends State<JumlahBarcode_SW> {
             children: [
 
             Widget_Header("Lokasi"),
-           
-            Widget_Header("Papan"),
-            Widget_Header("Log"),
-            Widget_Header("SKAU"),
-            Widget_Header("Tgl"),
+            
+            Widget_Header(section=='swout'?"Tujuan":"Type"),
+            
+            Widget_Header("jum"),
+            Widget_Header("Tgl Doc."),
+            Widget_Header("Tgl Upload."),
+            
 
             ]
           ),
@@ -88,7 +92,7 @@ class _JumlahBarcode_SWState extends State<JumlahBarcode_SW> {
                       margin: EdgeInsets.only(right: 1 ),
                       padding: EdgeInsets.only(top: 5,bottom: 5,left: 1,right: 1),
                       child: 
-                     Text(provx.getGlobalTrackingBarcode[i].jum!.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center)
+                     Text(provx.getGlobalTrackingBarcode[i].typetran.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center)
                      )
                      ),
 
@@ -102,10 +106,24 @@ class _JumlahBarcode_SWState extends State<JumlahBarcode_SW> {
                       margin: EdgeInsets.only(right: 1 ),
                       padding: EdgeInsets.only(top: 5,bottom: 5,left: 1,right: 1),
                       child: 
-                     Text(provx.getGlobalTrackingBarcode[i].jumlog!.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center,)
+                     Text(provx.getGlobalTrackingBarcode[i].jum!.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center,)
                      )
                      ),
 
+    //skau
+                    Expanded(child:
+                     Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        border: Border.all(style: BorderStyle.solid,color: Colors.white)
+                      ),
+                      margin: EdgeInsets.only(right: 1 ),
+                      padding: EdgeInsets.only(top: 5,bottom: 5,left: 1,right: 1),
+                      child: 
+                     Text(provx.getGlobalTrackingBarcode[i].tgl_doc!.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center,)
+                     )
+                     ),
+                       //skau
                          //skau
                     Expanded(child:
                      Container(
@@ -116,22 +134,11 @@ class _JumlahBarcode_SWState extends State<JumlahBarcode_SW> {
                       margin: EdgeInsets.only(right: 1 ),
                       padding: EdgeInsets.only(top: 5,bottom: 5,left: 1,right: 1),
                       child: 
-                     Text(provx.getGlobalTrackingBarcode[i].no_skau!.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center,)
+                     Text(provx.getGlobalTrackingBarcode[i].tgl_rec!.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center,)
                      )
                      ),
                        //skau
-                    Expanded(child:
-                     Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black,
-                        border: Border.all(style: BorderStyle.solid,color: Colors.white)
-                      ),
-                      margin: EdgeInsets.only(right: 1 ),
-                      padding: EdgeInsets.only(top: 5,bottom: 5,left: 1,right: 1),
-                      child: 
-                     Text(provx.getGlobalTrackingBarcode[i].tgl_rec.toString(),style: TextStyle(fontSize: 6,color: Colors.white),textAlign: TextAlign.center,)
-                     )
-                     ),
+                  
                   ],
                 );
               
@@ -160,7 +167,7 @@ class _JumlahBarcode_SWState extends State<JumlahBarcode_SW> {
               color: Colors.blue,
               border: Border.all(style: BorderStyle.solid)
             ),
-            child: Text(nama,style: TextStyle(color: Colors.white),textAlign: TextAlign.center,),)
+            child: Text(nama,style: TextStyle(color: Colors.white,fontSize: 10),textAlign: TextAlign.center,),)
           );
   }
 }

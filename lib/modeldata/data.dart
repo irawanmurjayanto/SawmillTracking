@@ -8,8 +8,8 @@ class TrackingBarcode{
   String?noref;
   String?lokasi;
   String?typetran;
-  String?jum;
-  String?jumlog;
+  int?jum;
+  int?jumlog;
   String?no_skau;
   String?tgl_doc;
   String?tgl_rec;
@@ -19,14 +19,14 @@ class TrackingBarcode{
   factory TrackingBarcode.fromJson(Map<String,dynamic>json)
   {
     return TrackingBarcode(
-      noref: json['noref'],
-      lokasi: json['lokasi'],
-      typetran: json['typetran'],
-      jum: json['jum'],
-      jumlog: json['jumlog'],
-      no_skau: json['no_skau'],
-      tgl_doc: json['tgl_doc'],
-      tgl_rec: json['tgl_rec'],
+      noref: json['noref'] ??'-',
+      lokasi: json['lokasi']??'-',
+      typetran: json['typetran']??'-',
+      jum: json['jum']??0,
+      jumlog: json['jumlog']??0,
+      no_skau: json['no_skau']??'-',
+      tgl_doc: json['tgl_doc']??'-',
+      tgl_rec: json['tgl_rec']??'-',
 
       
       );

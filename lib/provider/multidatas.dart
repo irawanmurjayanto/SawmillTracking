@@ -21,7 +21,7 @@ class Multidatas with ChangeNotifier {
   Future <void> getDataTrackingBarcode(BuildContext context,String section) async{
     getTrackingBarcode.clear();
 
-    var url=Uri.parse(NamaServer.server+'trackingbarcode_section.php');
+    var url=Uri.parse(NamaServer.server+'sawmill/trackingbarcode_section.php');
      final response= await http.post(url,
      body: {
       'section':section
@@ -43,7 +43,9 @@ if (jsonwarn['errormsg']=='Tidak ada data')
 
 
   final json=jsonDecode(response.body)['data'] as List;
+ 
   final newdata=json.map((a)=>TrackingBarcode.fromJson(a)).toList();
+ print (newdata);
   getTrackingBarcode=newdata;
   notifyListeners();
   EasyLoading.dismiss();
